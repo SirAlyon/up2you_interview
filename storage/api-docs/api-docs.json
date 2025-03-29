@@ -1,0 +1,809 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Up2You API Documentation",
+        "description": "Documentazione delle API per la gestione di eventi e iscritti",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/attendees": {
+            "get": {
+                "tags": [
+                    "Attendees"
+                ],
+                "summary": "Recupera la lista di tutti gli iscritti",
+                "operationId": "07252fa9523cadea6324ea21430db788",
+                "responses": {
+                    "200": {
+                        "description": "Lista degli iscritti",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "firstname": {
+                                                "type": "string",
+                                                "example": "Mario"
+                                            },
+                                            "lastname": {
+                                                "type": "string",
+                                                "example": "Rossi"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "mario.rossi@example.com"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Attendees"
+                ],
+                "summary": "Crea un nuovo iscritto",
+                "operationId": "1b7f6aec6b49c9767416d8bddd81519b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "firstname",
+                                    "lastname",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "firstname": {
+                                        "type": "string",
+                                        "example": "Mario"
+                                    },
+                                    "lastname": {
+                                        "type": "string",
+                                        "example": "Rossi"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "mario.rossi@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Iscritto creato con successo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "firstname": {
+                                            "type": "string",
+                                            "example": "Mario"
+                                        },
+                                        "lastname": {
+                                            "type": "string",
+                                            "example": "Rossi"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "mario.rossi@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errore di validazione"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/attendees/{id}": {
+            "get": {
+                "tags": [
+                    "Attendees"
+                ],
+                "summary": "Recupera i dettagli di un iscritto",
+                "operationId": "b1ede3ccf9c8db6b7084bea2c3b0b34b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dell'iscritto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dettagli dell'iscritto",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "firstname": {
+                                            "type": "string",
+                                            "example": "Mario"
+                                        },
+                                        "lastname": {
+                                            "type": "string",
+                                            "example": "Rossi"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "mario.rossi@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Iscritto non trovato"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Attendees"
+                ],
+                "summary": "Aggiorna un iscritto esistente",
+                "operationId": "42b6aa1e8b15a60617697ffd254a656e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dell'iscritto da aggiornare",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "firstname",
+                                    "lastname",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "firstname": {
+                                        "type": "string",
+                                        "example": "Mario"
+                                    },
+                                    "lastname": {
+                                        "type": "string",
+                                        "example": "Rossi"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "mario.rossi@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Iscritto aggiornato con successo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "firstname": {
+                                            "type": "string",
+                                            "example": "Mario"
+                                        },
+                                        "lastname": {
+                                            "type": "string",
+                                            "example": "Rossi"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "mario.rossi@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errore di validazione"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Attendees"
+                ],
+                "summary": "Elimina un iscritto",
+                "operationId": "737979a7a5f77aaaccf1e47a60af5469",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dell'iscritto da eliminare",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Iscritto eliminato con successo"
+                    },
+                    "404": {
+                        "description": "Iscritto non trovato"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/events": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Recupera la lista di tutti gli eventi",
+                "operationId": "7058ab7c89d20c752b6afd6d808f6526",
+                "responses": {
+                    "200": {
+                        "description": "Lista degli eventi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Laravel Conference"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Una conferenza su Laravel."
+                                            },
+                                            "scheduled_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2025-03-30T10:00:00Z"
+                                            },
+                                            "location": {
+                                                "type": "string",
+                                                "example": "Milano"
+                                            },
+                                            "max_attendees": {
+                                                "type": "integer",
+                                                "example": 100
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Crea un nuovo evento",
+                "operationId": "508895e03d7f10edac84357084c87b20",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "scheduled_at",
+                                    "location",
+                                    "max_attendees"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Conference"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Una conferenza su Laravel."
+                                    },
+                                    "scheduled_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-03-30T10:00:00Z"
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "Milano"
+                                    },
+                                    "max_attendees": {
+                                        "type": "integer",
+                                        "example": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento creato con successo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Laravel Conference"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Una conferenza su Laravel."
+                                        },
+                                        "scheduled_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-03-30T10:00:00Z"
+                                        },
+                                        "location": {
+                                            "type": "string",
+                                            "example": "Milano"
+                                        },
+                                        "max_attendees": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errore di validazione"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/events/{id}": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Recupera i dettagli di un evento",
+                "operationId": "6f743f71f7a88dbe57be1d9c9ebf47cb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dell'evento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dettagli dell'evento",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Laravel Conference"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Una conferenza su Laravel."
+                                        },
+                                        "scheduled_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-03-30T10:00:00Z"
+                                        },
+                                        "location": {
+                                            "type": "string",
+                                            "example": "Milano"
+                                        },
+                                        "max_attendees": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Evento non trovato"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Aggiorna un evento esistente",
+                "operationId": "fb130dcf1ab4d7abbd3a173741df1f8f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dell'evento da aggiornare",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "scheduled_at",
+                                    "location",
+                                    "max_attendees"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Conference"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Una conferenza aggiornata su Laravel."
+                                    },
+                                    "scheduled_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-04-01T09:00:00Z"
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "Roma"
+                                    },
+                                    "max_attendees": {
+                                        "type": "integer",
+                                        "example": 150
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Evento aggiornato con successo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Laravel Conference"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Una conferenza aggiornata su Laravel."
+                                        },
+                                        "scheduled_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-04-01T09:00:00Z"
+                                        },
+                                        "location": {
+                                            "type": "string",
+                                            "example": "Roma"
+                                        },
+                                        "max_attendees": {
+                                            "type": "integer",
+                                            "example": 150
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errore di validazione"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Elimina un evento",
+                "operationId": "b8c8f4b41a32532f5e9f7146e511bc61",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dell'evento da eliminare",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Evento eliminato con successo"
+                    },
+                    "404": {
+                        "description": "Evento non trovato"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/events/{event_id}/register": {
+            "post": {
+                "tags": [
+                    "Participation"
+                ],
+                "summary": "Registra un iscritto a un evento",
+                "operationId": "11637fa8dbbbccc0ce40a360ad5864ee",
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "description": "ID dell'evento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "attendee_id"
+                                ],
+                                "properties": {
+                                    "attendee_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Registrazione completata con successo"
+                    },
+                    "400": {
+                        "description": "Errore: limite di partecipanti raggiunto o iscritto già registrato",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Numero massimo di partecipanti raggiunto"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "description": "API Key necessaria per accedere alle API",
+                "name": "X-API-KEY",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Attendees",
+            "description": "Endpoint per la gestione degli iscritti"
+        },
+        {
+            "name": "Events",
+            "description": "Endpoint per la gestione degli eventi"
+        },
+        {
+            "name": "Participation",
+            "description": "Endpoint per la registrazione degli iscritti agli eventi"
+        }
+    ]
+}
