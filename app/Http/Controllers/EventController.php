@@ -92,7 +92,6 @@ class EventController extends Controller
 
         $event = Event::create($data);
 
-
         return $event->load('attendees');
     }
 

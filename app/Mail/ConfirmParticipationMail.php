@@ -44,6 +44,7 @@ class ConfirmParticipationMail extends Mailable
     {
         return new Content(
             view: 'emails.confirm_participation',
+
         );
     }
 
